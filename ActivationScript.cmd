@@ -1,32 +1,46 @@
-:: This script requires administrative privileges to run
 @echo off
 :: Check for administrative privileges
 net session >nul 2>&1
-if %errorLevel% == 0 (
-    echo Running with administrative privileges...
-) else (
+if %errorlevel% neq 0 (
     echo Requesting administrative privileges...
     powershell -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
 )
-title Download Microsoft Office LTSC Professional Plus 2024 !
-echo.
-echo.
+
+title Activate Microsoft Office LTSC Professional Plus 2024 !
+cls
 echo ============================================================================
-echo #Project: Download Microsoft Office LTSC Professional Plus 2024
+echo #Project: Activating Microsoft software products
 echo #Developed By Denish Borad
 echo #Github: https://github.com/denish7910
 echo ============================================================================
 echo.
+echo #Supported products:
+echo - Microsoft Office LTSC Professional Plus 2024
 echo.
-
-
-:: Copy the office2024 folder to C:/ drive
-xcopy "%~dp0office2024" "C:/office2024" /E /I /Y
-
-:: Change directory to C:/office2024
-cd /d C:/office2024
-
-:: Run your command here
-echo This script is running....
-setup /configure configuration.xml
+echo.
+if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" (
+    cd /d "%ProgramFiles%\Microsoft Office\Office16"
+    echo.
+    echo ============================================================================
+    echo Activating your Office...
+    cscript ospp.vbs /sethst:kms.03k.org
+    echo ============================================================================
+    echo.
+    echo.
+    cscript ospp.vbs /act
+) else (
+    echo Microsoft Office LTSC Professional Plus 2024 not installed. Please run the installation script first.
+    echo.
+    echo.
+)
+echo ============================================================================
+echo #Please feel free to contact me at reeddoy@gmail.com if you have any questions or concerns.
+echo ============================================================================
+choice /n /c YN /m "Would you like to visit my Page [Y,N]?" 
+if %errorlevel%==1 (
+    explorer "https://github.com/denish7910"
+) else (
+    exit
+)
+pause >nul
