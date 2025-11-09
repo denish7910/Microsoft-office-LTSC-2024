@@ -12,7 +12,6 @@ cls
 echo ============================================================================
 echo #Project: Activating Microsoft software products
 echo #Developed By Denish Borad
-echo #Organization: Denish Personal Project
 echo #Github: https://github.com/denish7910
 echo ============================================================================
 echo.
